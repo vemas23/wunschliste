@@ -1,0 +1,41 @@
+---
+interface Props {
+  id: string;
+  link: string;
+  imgsrc: string;
+  imgalt: string;
+  text: string;
+  title: string;
+}
+
+const { id, link, imgsrc, imgalt, text, title } = Astro.props;
+const formattedLink = link.startsWith("http://") || link.startsWith("https://") ? link : `https://${link}`;
+---
+
+<div class="card card-compact bg-base-100 w-96 shadow-xl">
+  <figure>
+    <img src={imgsrc} alt={imgalt} />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title">{title}</h2>
+    <p>{text}</p>
+    <div class="card-actions justify-end">
+      <!-- Button to open the modal -->
+      <button class="btn btn-primary" onclick={`document.getElementById('my_modal_${id}').showModal()`}>
+        Wo?
+      </button>
+    </div>
+  </div>
+</div>
+
+<dialog id={`my_modal_${id}`} class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">Wo?</h3>
+    <p class="py-4">Hier kann man es kaufen: <a href={formattedLink} class="text-blue-500 underline">{link}</a></p>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn">Schliessen</button>
+      </form>
+    </div>
+  </div>
+</dialog>
