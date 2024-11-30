@@ -6,22 +6,32 @@ interface Props {
   imgalt: string;
   text: string;
   title: string;
+  dir1: string;
+  dir2: string;
 }
 
-const { id, link, imgsrc, imgalt, text, title } = Astro.props;
-const formattedLink = link.startsWith("http://") || link.startsWith("https://") ? link : `https://${link}`;
+const { id, link, imgsrc, imgalt, text, title, dir1, dir2 } = Astro.props;
+const formattedLink =
+  link.startsWith("http://") || link.startsWith("https://")
+    ? link
+    : `https://${link}`;
 ---
 
-<div class="card card-compact bg-base-100 w-96 shadow-xl">
+<div
+  class={`absolute card card-compact bg-base-100 w-96 shadow-xl ${dir1}-2.5 ${dir2}-2.5`}
+>
   <figure>
-    <img src={imgsrc} alt={imgalt} />
+    <img src={imgsrc} alt={imgalt} class="shadow-md" />
   </figure>
   <div class="card-body">
     <h2 class="card-title">{title}</h2>
     <p>{text}</p>
     <div class="card-actions justify-end">
       <!-- Button to open the modal -->
-      <button class="btn btn-primary" onclick={`document.getElementById('my_modal_${id}').showModal()`}>
+      <button
+        class="btn btn-primary"
+        onclick={`document.getElementById('my_modal_${id}').showModal()`}
+      >
         Wo?
       </button>
     </div>
@@ -31,7 +41,11 @@ const formattedLink = link.startsWith("http://") || link.startsWith("https://") 
 <dialog id={`my_modal_${id}`} class="modal">
   <div class="modal-box">
     <h3 class="text-lg font-bold">Wo?</h3>
-    <p class="py-4">Hier kann man es kaufen: <a href={formattedLink} class="text-blue-500 underline">{link}</a></p>
+    <p class="py-4">
+      Hier kann man es kaufen: <a
+        href={formattedLink}
+        class="text-blue-500 underline">{link}</a>
+    </p>
     <div class="modal-action">
       <form method="dialog">
         <button class="btn">Schliessen</button>
