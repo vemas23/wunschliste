@@ -6,11 +6,10 @@ interface Props {
   imgalt: string;
   text: string;
   title: string;
-  dir1: string;
-  dir2: string;
+  twstyle: string;
 }
 
-const { id, link, imgsrc, imgalt, text, title, dir1, dir2 } = Astro.props;
+const { id, link, imgsrc, imgalt, text, title, twstyle } = Astro.props;
 const formattedLink =
   link.startsWith("http://") || link.startsWith("https://")
     ? link
@@ -18,7 +17,7 @@ const formattedLink =
 ---
 
 <div
-  class={`absolute card card-compact bg-base-100 w-96 shadow-xl ${dir1}-2.5 ${dir2}-2.5`}
+  class={`absolute card card-compact bg-base-100 w-96 shadow-xl shadow-gray-900 ${twstyle}`}
 >
   <figure>
     <img src={imgsrc} alt={imgalt} class="shadow-md" />
@@ -44,7 +43,8 @@ const formattedLink =
     <p class="py-4">
       Hier kann man es kaufen: <a
         href={formattedLink}
-        class="text-blue-500 underline">{link}</a>
+        class="text-blue-500 underline">{link}</a
+      >
     </p>
     <div class="modal-action">
       <form method="dialog">
