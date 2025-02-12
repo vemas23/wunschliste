@@ -8,6 +8,6 @@ export default {
 		require('daisyui'),
 	],
 	daisyui: {
-		themes: ["synthwave"],
+		themes: ["night"],
 	},
 }
